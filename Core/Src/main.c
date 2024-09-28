@@ -223,7 +223,7 @@ int main(void)
   	epd_paint_showString(10, 29, (uint8_t *)&"Designed By WeAct Studio", EPD_FONT_SIZE16x8, EPD_COLOR_BLACK);
   #endif
   #if 1
-      epd_paint_showString(10,100,(uint8_t *)&"GD32F103CBT6 Example",EPD_FONT_SIZE16x8,EPD_COLOR_BLACK);
+      epd_paint_showString(10,100,(uint8_t *)&"STM32F103C8T6 Example",EPD_FONT_SIZE16x8,EPD_COLOR_BLACK);
   #else
   	epd_paint_drawRectangle(10, EPD_W-20, EPD_H - 10, EPD_W-6, EPD_COLOR_BLACK, 1);
   #endif

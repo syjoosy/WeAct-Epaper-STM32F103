@@ -27,9 +27,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0000a1d8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000069d1  00000000  00000000  0000a201  2**0
+ 12 .debug_info   000069ce  00000000  00000000  0000a201  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001912  00000000  00000000  00010bd2  2**0
+ 13 .debug_abbrev 00001914  00000000  00000000  00010bcf  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_aranges 00000808  00000000  00000000  000124e8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -1017,9 +1017,6 @@ uint8_t epd_is_busy()
  8000b48:	40010800 	.word	0x40010800
 
 08000b4c <epd_write_reg>:
-//
-//  spi_enable(SPI1);
-//}
 
 void epd_write_reg(uint8_t reg)
 {
@@ -1032,10 +1029,6 @@ void epd_write_reg(uint8_t reg)
  8000b56:	f7ff ffc9 	bl	8000aec <epd_dc_reset>
   epd_cs_reset();
  8000b5a:	f7ff ffdf 	bl	8000b1c <epd_cs_reset>
-//  while (spi_i2s_flag_get(SPI1, SPI_FLAG_TBE) == RESET)
-//    ;
-//  while (spi_i2s_flag_get(SPI1, SPI_FLAG_TRANS) != RESET)
-//    ;
 
   HAL_SPI_Transmit(&hspi1, &reg, 1, 100);
  8000b5e:	1df9      	adds	r1, r7, #7
@@ -1091,10 +1084,7 @@ void epd_write_data(uint8_t data)
  8000bae:	4603      	mov	r3, r0
  8000bb0:	2b01      	cmp	r3, #1
  8000bb2:	d1f9      	bne.n	8000ba8 <epd_write_data+0x1c>
-//  while (spi_i2s_flag_get(SPI1, SPI_FLAG_TBE) == RESET)
-//    ;
-//  while (spi_i2s_flag_get(SPI1, SPI_FLAG_TRANS) != RESET)
-//    ;
+      ;
 
   epd_cs_set();
  8000bb4:	f7ff ffa6 	bl	8000b04 <epd_cs_set>
@@ -1130,9 +1120,6 @@ void _epd_write_data(uint8_t data)
  8000be0:	2201      	movs	r2, #1
  8000be2:	4803      	ldr	r0, [pc, #12]	@ (8000bf0 <_epd_write_data+0x2c>)
  8000be4:	f001 ff58 	bl	8002a98 <HAL_SPI_Transmit>
-//  while (spi_i2s_flag_get(SPI1, SPI_FLAG_TBE) == RESET)
-//    ;
-//  spi_i2s_data_transmit(SPI1, data);
 }
  8000be8:	bf00      	nop
  8000bea:	3708      	adds	r7, #8
@@ -1146,8 +1133,6 @@ void _epd_write_data_over()
 {
  8000bf4:	b580      	push	{r7, lr}
  8000bf6:	af00      	add	r7, sp, #0
-//  while (spi_i2s_flag_get(SPI1, SPI_FLAG_TRANS) != RESET)
-//    ;
   while (HAL_SPI_GetState(&hspi1) != HAL_SPI_STATE_READY)
  8000bf8:	bf00      	nop
  8000bfa:	4804      	ldr	r0, [pc, #16]	@ (8000c0c <_epd_write_data_over+0x18>)
@@ -2906,7 +2891,7 @@ int main(void)
   	epd_paint_showString(10, 29, (uint8_t *)&"Designed By WeAct Studio", EPD_FONT_SIZE16x8, EPD_COLOR_BLACK);
   #endif
   #if 1
-      epd_paint_showString(10,100,(uint8_t *)&"GD32F103CBT6 Example",EPD_FONT_SIZE16x8,EPD_COLOR_BLACK);
+      epd_paint_showString(10,100,(uint8_t *)&"STM32F103C8T6 Example",EPD_FONT_SIZE16x8,EPD_COLOR_BLACK);
  8001624:	2300      	movs	r3, #0
  8001626:	9300      	str	r3, [sp, #0]
  8001628:	2310      	movs	r3, #16
